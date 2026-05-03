@@ -15,25 +15,32 @@ RuleSet: GlucoseMolesPerVolume
   * unit = "mmol/l"
   * ^short = "Glucose value in mmol/L"
 
+Profile: CGMSensorReading
+Parent: Observation
+Id: cgm-sensor-reading
+Title: "CGM Sensor Reading"
+Description: "A continuous glucose monitoring (CGM) sensor reading represented in either mg/dl or mmol/l."
+* ^abstract = true
+* effectiveDateTime 1..1 MS
+  * ^short = "Time the measurement was taken"
+// require that code is $LNC#99504-3 or $LNC#14745-4?
+// require that value is either GlucoseMassPerVolume or GlucoseMolesPerVolume?
+
 Profile: CGMSensorReadingMassPerVolume
-Parent: http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab
+Parent: CGMSensorReading
 Id: cgm-sensor-reading-mass-per-volume
 Title: "CGM Sensor Reading (Mass)"
 Description: "A continuous glucose monitoring (CGM) sensor reading represented in mass units."
 * insert GlucoseMassPerVolume
 * code = $LNC#99504-3
-* effectiveDateTime 1..1 MS
-  * ^short = "Time the measurement was taken"
 
 Profile: CGMSensorReadingMolesPerVolume
-Parent: http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab
+Parent: CGMSensorReading
 Id: cgm-sensor-reading-moles-per-volume
 Title: "CGM Sensor Reading (Molar)"
 Description: "A continuous glucose monitoring (CGM) sensor reading represented in molar units."
 * insert GlucoseMolesPerVolume
 * code = $LNC#14745-4
-* effectiveDateTime 1..1 MS
-  * ^short = "Time the measurement was taken"
 
 RuleSet: CGMSummaryBase
 * code
